@@ -12,11 +12,9 @@ import com.redimybase.framework.bean.R;
 import com.redimybase.framework.web.BaseController;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import redis.clients.jedis.Jedis;
 
 import java.util.Date;
@@ -37,18 +35,17 @@ public class CompanyController extends BaseController<String, CompanyEntity, Com
      */
     @PostMapping("rankList")
     public R<?> rankList(@RequestBody RankPage<CompanyEntity> page) {
-        IPage<CompanyEntity> dataPage = service.page(page, new QueryWrapper<CompanyEntity>().lambda().orderByDesc(CompanyEntity::getPoint));
-        for (CompanyEntity record : dataPage.getRecords()) {
-            record.setPoint(record.getPoint());
-        }
-        return new R<>(dataPage);
+        return new R<>(service.rankList(page));
     }
 
     @Override
     public R<?> save(CompanyEntity entity) {
         if (StringUtils.isBlank(entity.getId())) {
-            if (service.count(new QueryWrapper<CompanyEntity>().lambda().eq(CompanyEntity::getCompanyName, entity.getCompanyName())) > 0) {
-                return R.fail("小子你居心不良呀~~重新输个名字再试试");
+            CompanyEntity companyEntity = service.getOne(new QueryWrapper<CompanyEntity>().lambda().eq(CompanyEntity::getCompanyName, entity.getCompanyName()).select(CompanyEntity::getId));
+
+            if (companyEntity!=null) {
+                service.fuck(companyEntity.getId());
+                return R.ok();
             }
             entity.setCreateTime(new Date());
             entity.setPoint(0L);
@@ -73,21 +70,13 @@ public class CompanyController extends BaseController<String, CompanyEntity, Com
      * 砍他
      */
     @PostMapping("fuck")
-    @Transactional(rollbackFor = Exception.class)
     public R<?> fuck(String id) {
-        Set set = redisUtils.zsetRange(id, 0, -1);
-        if (set != null && set.size() > 0) {
-            //点赞一次
-            redisUtils.zsetIncrementScore(id, "point", 1);
-        } else {
-            redisUtils.zset(id, "point", 1);
+        if (StringUtils.isBlank(id)) {
+            return R.ok();
         }
-        return R.ok();
+        return service.fuck(id);
     }
 
-
-    @Autowired
-    private RedisUtils redisUtils;
 
     @Autowired
     private CompanyServiceImpl service;

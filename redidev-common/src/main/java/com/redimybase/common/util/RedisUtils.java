@@ -148,6 +148,47 @@ public class RedisUtils {
     }
 
     /**
+     * 存入hash
+     *
+     * @param key
+     *            键
+     * @param value
+     *            值
+     * @return true成功 false失败
+     */
+    public boolean hash(String key, Object value,long socre) {
+        try {
+            redisTemplate.opsForHash().put(key, value,socre);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    /**
+     * 指定hash自增
+     *
+     * @param key
+     *            键
+     * @param value
+     *            值
+     * @return true成功 false失败
+     */
+    public boolean hashIncrementScore(String key, Object value,long socre) {
+        try {
+            redisTemplate.opsForHash().increment(key, value,socre);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+
+    /**
      * 给指定有序集合自增
      *
      * @param key
