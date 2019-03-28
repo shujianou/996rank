@@ -88,7 +88,7 @@
                             <artifactId>redimybase</artifactId>
                         </include>
                         <include>
-                            <groupId>com.wwdj</groupId>
+                            <groupId>com.rank</groupId>
                             <artifactId>admin</artifactId>
                         </include>
                         <include>
@@ -108,7 +108,7 @@
                             <artifactId>redidev-security</artifactId>
                         </include>
                         <include>
-                            <groupId>com.wwdj</groupId>
+                            <groupId>com.rank</groupId>
                             <artifactId>manager</artifactId>
                         </include>
                     </includes>

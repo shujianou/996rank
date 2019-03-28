@@ -86,5 +86,5 @@ Class-Path: spring-security-web-5.0.8.RELEASE.jar error_prone_annotati
  identitylink-service-api-6.3.0.jar animal-sniffer-annotations-1.14.ja
  r activation-1.1.jar httpmime-4.5.3.jar flowable-form-spring-6.3.0.ja
  r
-Main-Class: com.wwdj.admin.AdminApplication
+Main-Class: com.rank.admin.AdminApplication
 

@@ -16,21 +16,21 @@ public class GeneratorTest {
 
     @Test
     public void generateCode() {
-        String packageName = "com.wwdj.manager.banner";      //包路径
+        String packageName = "com.rank.manager.company";      //包路径
         boolean serviceNameStartWithI = false;//user -> UserService, 设置成true: user -> IUserService
         generateByTables(false, "t_", packageName,
-                "t_app_banner");
+                "t_company");
     }
 
     private void generateByTables(boolean serviceNameStartWithI, String tablePrefix, String packageName, String... tableNames) {
         GlobalConfig config = new GlobalConfig();
-        String dbUrl = "jdbc:mysql://60.205.180.202:3306/wwdj_dev_db?serverTimezone=GMT%2B8";
+        String dbUrl = "jdbc:mysql://127.0.0.1:3306/996rank?serverTimezone=GMT%2B8";
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         dataSourceConfig
                 .setUrl(dbUrl)
                 .setDbType(DbType.MYSQL)
-                .setUsername("wwdj_dev_db")
-                .setPassword("Hellokitty666")
+                .setUsername("root")
+                .setPassword("root")
                 .setDriverName("com.mysql.jdbc.Driver");
         StrategyConfig strategyConfig = new StrategyConfig();
         strategyConfig

@@ -49,7 +49,7 @@ public abstract class BaseController<ID extends Serializable, E extends BaseEnti
             getService().updateById(entity);
         }
         afterSave(entity);
-        return R.ok(entity);
+        return new R<>(entity);
     }
 
     /**
@@ -95,7 +95,7 @@ public abstract class BaseController<ID extends Serializable, E extends BaseEnti
         E entity = getService().getById(id);
         return BizAssert.of(entity)
                 .ifNullThrow(ErrorEnum.未找到实体类)
-                .mapTo(e -> R.ok(entity))
+                .mapTo(e -> new R(entity))
                 .getData();
     }
 

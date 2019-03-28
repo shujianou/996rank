@@ -127,6 +127,61 @@ public class RedisUtils {
         }
 
     }
+    /**
+     * 存入有序集合
+     *
+     * @param key
+     *            键
+     * @param value
+     *            值
+     * @return true成功 false失败
+     */
+    public boolean zset(String key, Object value,double socre) {
+        try {
+            redisTemplate.opsForZSet().add(key, value,socre);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    /**
+     * 给指定有序集合自增
+     *
+     * @param key
+     *            键
+     * @param value
+     *            值
+     * @return true成功 false失败
+     */
+    public boolean zsetIncrementScore(String key, Object value,double socre) {
+        try {
+            redisTemplate.opsForZSet().incrementScore(key, value,socre);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+
+    /**
+     * 取指定范围有序集合
+     *
+     * @param key
+     */
+    public Set zsetRange(String key,long start,long end) {
+        try {
+            return redisTemplate.opsForZSet().range(key, start, end);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
     /**
      * 普通缓存放入并设置时间

@@ -2,8 +2,8 @@ package com.redimybase.security.utils;
 
 import com.redimybase.common.util.MD5;
 import com.redimybase.framework.listener.SpringContextListener;
-import com.wwdj.manager.security.entity.AppUserEntity;
-import com.wwdj.manager.security.service.AppUserService;
+import com.rank.manager.security.entity.AppUserEntity;
+import com.rank.manager.security.service.AppUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;

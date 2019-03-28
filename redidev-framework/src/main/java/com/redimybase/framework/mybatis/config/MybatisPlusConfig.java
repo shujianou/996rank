@@ -24,7 +24,7 @@ import java.util.Properties;
  * Created by Irany 2018/6/15 11:38
  */
 @Configuration
-//@MapperScan({"com.redimybase.manager.*.mapper","com.wwdj.manager.*.mapper"})
+//@MapperScan({"com.redimybase.manager.*.mapper","com.rank.manager.*.mapper"})
 public class MybatisPlusConfig {
 
     /**
@@ -41,7 +41,7 @@ public class MybatisPlusConfig {
 
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
-        factoryBean.setTypeAliasesPackage("com.redimybase.manager.*.mapper,com.wwdj.manager.*.mapper");
+        factoryBean.setTypeAliasesPackage("com.redimybase.manager.*.mapper,com.rank.manager.*.mapper");
         factoryBean.setMapperLocations(mapperResources());
         factoryBean.setConfiguration(mybatisConfiguration);
         Properties properties = new Properties();

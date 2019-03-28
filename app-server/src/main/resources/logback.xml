@@ -156,7 +156,7 @@
     <logger name="com.ibatis.common.jdbc.ScriptRunner" level="DEBUG"/>
     <logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" value="DEBUG"/>
     <logger name="com.redimybase" value="DEBUG"/>
-    <logger name="com.wwdj" value="DEBUG"/>
+    <logger name="com.rank" value="DEBUG"/>
 
 
     <!-- root级别 -->
